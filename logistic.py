@@ -2,7 +2,9 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 
-filename=r"c:\Users\Administrator\Desktop\机器学习\lesson4\testSet.txt"
+train_dir=r"C:\Users\E507\Desktop\logsitic\horseColicTraining.txt"
+test_dir=r"C:\Users\E507\Desktop\logsitic\horseColicTest.txt"
+
 #=====================
 # 1. 数据读取函数
 #=====================
@@ -31,8 +33,16 @@ def replace_nan_with_mean(X):
 # 3. 主流程
 #=====================
 # 读取训练集
-
-
+def main():
+    X_train,y_train = load_dataset(train_dir)
+    X_test,y_test = load_dataset(test_dir)
+    clf = LogisticRegression(solver='lbfgs',max_iter=3000)
+    clf.fit(X_train,y_train)
+    y_pred_sk = clf.predict(X_test)
+    acc_sk=np.mean(y_pred_sk==y_test)
+    print(acc_sk)
+if __name__ =="__main__":
+    main()
 # 读取测试集
 
 
